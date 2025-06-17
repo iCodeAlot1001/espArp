@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+
+    </head>
+<body>
+    <header>
+        <h1>add ip of master</h1>
+    </header>
+    <main>
+        <form action="/monitorMode" method="POST">
+        <input type="text" name="inputIP" id="inputIP" placeholder="Enter SSID" required>
+        <input type="text" name="routerIP" id="routerIP" placeholder="Enter Password" required>
+        <button type="submit">Submit</button>
+        </form>
+        <br>
+        <label for="fileHandle">Upload payload</label>
+        <input type="file" name="fileHandle">
+        <br>
+        <br>
+        <a href="/monitor" class="button">Go to Example</a>
+
+    </main>
+
+    <footer>
+        <p>&copy; Romar Hernandez 2025</p>
+        <pre>
+github: https://github.com/iCodeAlot1001
+        </pre>
+    </footer>
+</body>
