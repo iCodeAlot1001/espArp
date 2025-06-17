@@ -4,12 +4,11 @@
 char* ssid;
 char* password;
 
-String input; //target 
-String routerIP;
+
 
 extern std::vector<String> scannedNet;
 extern std::vector<String> storeNetworks;
 
-printOut();
+extern std::array<String, 100> crckpayload; 
 
 #endif      // globalVar.h

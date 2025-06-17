@@ -12,9 +12,9 @@
         <h1>add ip of master</h1>
     </header>
     <main>
-        <form action="/monitorMode" method="POST">
-        <input type="text" name="inputIP" id="inputIP" placeholder="Enter SSID" required>
-        <input type="text" name="routerIP" id="routerIP" placeholder="Enter Password" required>
+        <form action="/input" method="POST">
+        <input type="text" name="targetSsid" id="inputIP" placeholder="Enter SSID" required>
+        <input type="text" name="targetPass" id="routerIP" placeholder="Enter Password (optional)">
         <button type="submit">Submit</button>
         </form>
         <br>
@@ -22,7 +22,9 @@
         <input type="file" name="fileHandle">
         <br>
         <br>
-        <a href="/monitor" class="button">Go to Example</a>
+        <a href="/monitorMode" class="button">Go to Monitor</a>
+        <br>
+        <a href="/checkPass" class="button2">Check Pass</a>
 
     </main>
 

