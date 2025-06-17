@@ -1,6 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
-#include <html/home.html>
+#include "home.html"
 #include <vector>
 
 std::vector<String> scannedNet;
