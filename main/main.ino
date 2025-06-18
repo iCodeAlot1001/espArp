@@ -1,6 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
-#include "home.html"
+#include "home.cpp"
 #include <vector>
 
 std::vector<String> scannedNet;
@@ -36,7 +36,7 @@ void setup() {
 }
 
 void handleRoot() {
-  String html = home.html; server.send(200, "text/html", html);}
+  String html = home.cpp; server.send(200, "text/html", html);}
 
 void inputHandler() {
   if (server.hasArg("targetSsid")) {
@@ -74,19 +74,19 @@ void bruteForce(){
 }
 
 void monitorMode(){
-  String html = "<html><head><title>ESP8266 Data</title></head><body>";
-  html += "<h1>Wi-Fi Scan Results</h1>";
-  html += "<p>Found " + String(scannedNet.size()) + " networks:</p>";
-  html += "<ul>";
+  String html1 = "<html><head><title>ESP8266 Data</title></head><body>";
+  html1 += "<h1>Wi-Fi Scan Results</h1>";
+  html1 += "<p>Found " + String(scannedNet.size()) + " networks:</p>";
+  html1 += "<ul>";
   
   for (const auto& network : storeNetworks) {
-    html += "<li>" + network + "</li>";
+    html1 += "<li>" + network + "</li>";
   }
   
-  html += "</ul>";
-  html += "</body></html>";
+  html1 += "</ul>";
+  html1 += "</body></html>";
   
-  server.send(200, "text/html", html);
+  server.send(200, "text/html", html1);
 }
 void loop() {
   server.handleClient();
