@@ -1,14 +1,14 @@
+#pragma once
 #ifdef      GLOBALVAR_H
 #define     GLOBALVAR_H
 
 char* ssid;
 char* password;
 
+extern std::string htmlHome;
 
-
-extern std::vector<String> scannedNet;
+extern std::vector<int> scannedNet;
 extern std::vector<String> storeNetworks;
-extern std::array<String, 100> crckpayload; 
-
+std::string crckpayload[];
 
 #endif      // globalVar.h

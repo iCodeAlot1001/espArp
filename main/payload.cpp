@@ -1,6 +1,7 @@
 #include <array>
+#include <string>
 
-std::array<String, 100> crckpayload [
+std::string crckpayload[101] = {
 "Password",
 "password",
 "12345678",
@@ -101,4 +102,4 @@ std::array<String, 100> crckpayload [
 "wifi1243",
 "admin132",
 "12345706",
-"12345707"]
+"12345707"};
