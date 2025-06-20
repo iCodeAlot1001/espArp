@@ -1,5 +1,6 @@
 #include <array>
 #include <string>
+#include "globalVar.h"
 
 std::string crckpayload[101] = {
 "Password",

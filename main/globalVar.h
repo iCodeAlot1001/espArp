@@ -9,6 +9,6 @@ extern std::string htmlHome;
 
 extern std::vector<int> scannedNet;
 extern std::vector<String> storeNetworks;
-std::string crckpayload[];
+extern std::string crckpayload[101];
 
 #endif      // globalVar.h
